@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tamil Foundation Programme — Devvdarshan</title>
+<style>
+  :root{
+    --bg:#fdf6ec; --card:#ffffff; --ink:#2b2b3a; --muted:#6b6b7b;
+    --brand:#c1440e; --brand2:#e07b39; --gold:#e6a817; --green:#2e8b57;
+    --red:#c0392b; --blue:#2c6fbb; --line:#ecdfce; --soft:#fbeee0;
+    --shadow:0 6px 22px rgba(120,60,20,.10);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Segoe UI",system-ui,-apple-system,"Noto Sans Tamil",sans-serif;
+    background:linear-gradient(160deg,#fdf6ec,#faf0e2);color:var(--ink);line-height:1.55}
+  .tamil{font-family:"Noto Sans Tamil","Latha","Nirmala UI","Segoe UI",sans-serif}
+  header.top{background:linear-gradient(120deg,var(--brand),var(--brand2));color:#fff;
+    padding:26px 20px;text-align:center;box-shadow:var(--shadow)}
+  header.top h1{margin:0;font-size:1.75rem;letter-spacing:.3px}
+  header.top .sub{opacity:.95;margin-top:6px;font-size:.98rem}
+  .kolam{font-size:1.3rem;letter-spacing:6px;opacity:.85;margin-top:8px}
+  .wrap{max-width:920px;margin:0 auto;padding:22px 16px 70px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;
+    padding:20px;margin:16px 0;box-shadow:var(--shadow)}
+  h2{color:var(--brand);margin:.2em 0 .5em}
+  h3{color:var(--brand2);margin:1em 0 .4em}
+  .muted{color:var(--muted)}
+  .pill{display:inline-block;background:var(--soft);color:var(--brand);
+    border-radius:999px;padding:3px 12px;font-size:.8rem;font-weight:600;margin:2px 4px 2px 0}
+  .btn{display:inline-block;background:var(--brand);color:#fff;border:none;cursor:pointer;
+    padding:11px 20px;border-radius:10px;font-size:1rem;font-weight:600;transition:.15s;text-decoration:none}
+  .btn:hover{background:#a5360a;transform:translateY(-1px)}
+  .btn.alt{background:var(--green)}.btn.alt:hover{background:#256e45}
+  .btn.ghost{background:#fff;color:var(--brand);border:2px solid var(--brand)}
+  .btn.ghost:hover{background:var(--soft)}
+  .btn.gold{background:var(--gold);color:#3a2a00}.btn.gold:hover{background:#c78f0f}
+  .btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+  .grid{display:grid;gap:14px}
+  @media(min-width:640px){.grid.two{grid-template-columns:1fr 1fr}}
+  .weekcard{position:relative;overflow:hidden}
+  .weekcard .no{position:absolute;right:-8px;top:-14px;font-size:5rem;font-weight:800;
+    color:var(--soft);z-index:0}
+  .weekcard>*{position:relative;z-index:1}
+  .status{font-size:.82rem;font-weight:700;padding:3px 10px;border-radius:999px}
+  .status.todo{background:#f1e6d6;color:#8a6a3a}
+  .status.done{background:#dff2e6;color:var(--green)}
+  .letterbox{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0}
+  .glyph{background:var(--soft);border:1px solid var(--line);border-radius:12px;
+    padding:10px 12px;text-align:center;min-width:74px}
+  .glyph .big{font-size:1.7rem;color:var(--brand);line-height:1.1}
+  .glyph .rom{font-size:.82rem;color:var(--muted);margin-top:2px}
+  .glyph .mean{font-size:.75rem;color:var(--green);margin-top:1px}
+  table.tbl{width:100%;border-collapse:collapse;margin:8px 0}
+  table.tbl td,table.tbl th{border:1px solid var(--line);padding:8px;text-align:center}
+  table.tbl th{background:var(--soft);color:var(--brand)}
+  .section-tag{background:var(--brand);color:#fff;display:inline-block;padding:4px 12px;
+    border-radius:8px;font-weight:700;font-size:.85rem;margin-bottom:8px}
+  .q{border:1px solid var(--line);border-radius:12px;padding:16px;margin:14px 0;background:#fffdfa}
+  .q .qtext{font-weight:600;margin-bottom:10px}
+  .q .qtext .num{color:var(--brand);font-weight:800;margin-right:6px}
+  .opt{display:block;border:1.5px solid var(--line);border-radius:10px;padding:11px 14px;
+    margin:8px 0;cursor:pointer;transition:.12s;background:#fff}
+  .opt:hover{border-color:var(--brand2);background:var(--soft)}
+  .opt input{margin-right:10px}
+  .opt.sel{border-color:var(--brand);background:var(--soft)}
+  .opt.correct{border-color:var(--green);background:#e9f8ef}
+  .opt.wrong{border-color:var(--red);background:#fdeceb}
+  .explain{margin-top:10px;padding:11px 14px;border-radius:10px;font-size:.92rem}
+  .explain.ok{background:#e9f8ef;border-left:4px solid var(--green)}
+  .explain.no{background:#fdeceb;border-left:4px solid var(--red)}
+  .explain b{color:var(--ink)}
+  .scorebar{text-align:center;padding:18px;border-radius:14px;margin:10px 0;
+    background:linear-gradient(120deg,var(--soft),#fff)}
+  .scorebar .pct{font-size:3rem;font-weight:800;color:var(--brand);line-height:1}
+  .scorebar .lbl{font-size:1.05rem;font-weight:600;margin-top:4px}
+  .progresswrap{background:#efe2d0;border-radius:999px;height:14px;overflow:hidden;margin:12px 0}
+  .progressbar{height:100%;background:linear-gradient(90deg,var(--gold),var(--green));width:0;transition:.5s}
+  .note{font-size:.85rem;background:#fff8ec;border:1px dashed var(--gold);border-radius:10px;padding:10px 14px;color:#7a5a10}
+  .audiobar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:8px 0 4px}
+  .btn.audio{background:var(--blue);padding:8px 14px;font-size:.9rem;border-radius:20px}
+  .btn.audio:hover{background:#22568f}
+  .btn.audio.stop{background:#7a4b8f}.btn.audio.stop:hover{background:#623873}
+  .btn.sm{padding:7px 13px;font-size:.85rem;border-radius:8px}
+  .speaker{cursor:pointer;border:none;background:transparent;font-size:1.1rem;padding:2px 4px;line-height:1}
+  .speaker:hover{transform:scale(1.2)}
+  .glyph{position:relative}
+  .glyph.speaking{outline:3px solid var(--gold);outline-offset:2px}
+  .reading-note{font-size:.78rem;color:var(--muted);margin-left:auto}
+  .teacher-tbl{width:100%;border-collapse:collapse;margin:10px 0;font-size:.9rem}
+  .teacher-tbl th,.teacher-tbl td{border:1px solid var(--line);padding:8px 10px;text-align:left}
+  .teacher-tbl th{background:var(--brand);color:#fff}
+  .teacher-tbl tr:nth-child(even){background:#fbf4ea}
+  .badge{padding:2px 9px;border-radius:999px;font-size:.78rem;font-weight:700}
+  .badge.hi{background:#dff2e6;color:var(--green)}
+  .badge.mid{background:#fdf3d6;color:#8a6a10}
+  .badge.lo{background:#fdeceb;color:var(--red)}
+  details.attempt{border:1px solid var(--line);border-radius:10px;margin:8px 0;padding:6px 12px;background:#fffdfa}
+  details.attempt summary{cursor:pointer;font-weight:600;color:var(--brand)}
+  details.attempt .qrow{padding:6px 0;border-bottom:1px dashed var(--line);font-size:.9rem}
+  .ansline{margin-left:14px}.ansline.w{color:var(--red)}.ansline.r{color:var(--green)}
+  .gate{max-width:340px;margin:10px auto;text-align:center}
+  .gate input{padding:10px;border:1.5px solid var(--line);border-radius:8px;font-size:1rem;width:70%}
+  .hidden{display:none}
+  .backlink{cursor:pointer;color:var(--brand);font-weight:600;display:inline-block;margin-bottom:6px}
+  .backlink:hover{text-decoration:underline}
+  footer{text-align:center;color:var(--muted);font-size:.82rem;padding:24px}
+  .tick{color:var(--green);font-weight:800}
+  ul.clean{margin:.3em 0 .6em;padding-left:1.2em}
+  ul.clean li{margin:4px 0}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="kolam">✦ ◈ ✦ ◈ ✦</div>
+  <h1 class="tamil">தமிழ் அடித்தளம் • Tamil Foundation</h1>
+  <div class="sub">A 4-week beginner programme for <b>Devvdarshan</b></div>
+</header>
+
+<div class="wrap">
+
+  <!-- ============ HOME ============ -->
+  <div id="home">
+    <div class="card">
+      <h2>Welcome! 🙏 <span class="tamil">வணக்கம்</span></h2>
+      <p class="muted">This programme teaches Tamil from the very beginning — no prior knowledge needed.
+      Work through <b>one training programme each week</b>. Each week has short lessons broken into
+      exam-style sections, then a <b>test</b> at the end. After the test you'll see your score, and every
+      wrong answer is explained. Each completed test is <b>saved automatically for the teacher</b> to
+      review any time from <b>Teacher Access</b> below.</p>
+      <div class="progresswrap"><div class="progressbar" id="homeProgress"></div></div>
+      <div class="muted" id="progressText" style="text-align:center;font-size:.9rem">0 of 4 tests completed</div>
+      <div style="text-align:center;margin-top:14px">
+        <button class="btn ghost" onclick="openTeacher()">👩‍🏫 Teacher Access</button>
+        <button class="btn ghost" onclick="resetTraining()" style="margin-left:6px">↺ Reset Training</button>
+      </div>
+      <div class="muted" style="text-align:center;font-size:.78rem;margin-top:8px">
+        🔊 Tip: open each week to hear the letters and lessons read aloud.
+      </div>
+    </div>
+
+    <div class="grid two" id="weekGrid"></div>
+
+    <div class="card">
+      <h3>How the tests work</h3>
+      <ul class="clean">
+        <li><b>All questions are multiple-choice</b> — just tap the correct answer (no Tamil typing needed).</li>
+        <li>Each test is split into <b>Sections A, B, C…</b> like a real exam.</li>
+        <li>After submitting the test, correct answers show in <span style="color:var(--green);font-weight:600">green</span>
+            and mistakes in <span style="color:var(--red);font-weight:600">red</span>, each with an explanation.</li>
+        <li>The completed test is then <b>saved for the teacher</b>, viewable under <b>Teacher Access</b>.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ============ WEEK VIEW ============ -->
+  <div id="weekView" class="hidden">
+    <span class="backlink" onclick="goHome()">← Back to all weeks</span>
+    <div id="weekContent"></div>
+  </div>
+
+  <!-- ============ TEST VIEW ============ -->
+  <div id="testView" class="hidden">
+    <span class="backlink" onclick="goHome()">← Back to all weeks</span>
+    <div id="testContent"></div>
+  </div>
+
+  <!-- ============ TEACHER VIEW ============ -->
+  <div id="teacherView" class="hidden">
+    <span class="backlink" onclick="goHome()">← Back to all weeks</span>
+    <div id="teacherContent"></div>
+  </div>
+
+</div>
+
+<footer>Made for Devvdarshan • <span class="tamil">நல்ல படிப்பு!</span> (Happy learning!)</footer>
+
+<script>
+/* ============================================================
+   TAMIL FOUNDATION — DATA
+   Answer keys are deliberately NON-PATTERNED (mixed positions).
+   ============================================================ */
+
+const RECIPIENT = "harivel.prabu@gmail.com";
+
+const WEEKS = [
+  /* ---------------- WEEK 1 : VOWELS ---------------- */
+  {
+    id:1,
+    title:"Uyir Ezhuthu — The Vowels",
+    tamilTitle:"உயிர் எழுத்து",
+    blurb:"The 12 living letters (vowels). These are the 'soul' letters of Tamil.",
+    lessons:[
+      {tag:"Lesson 1", head:"Meet the 12 vowels (உயிர் எழுத்து)",
+       intro:"Tamil has 12 vowels. 'Uyir' means <i>life/soul</i> — these letters can be spoken on their own.",
+       glyphs:[
+         ["அ","a","like <b>a</b> in <i>about</i>"],["ஆ","aa","like <b>a</b> in <i>father</i>"],
+         ["இ","i","like <b>i</b> in <i>sit</i>"],["ஈ","ee","like <b>ee</b> in <i>see</i>"],
+         ["உ","u","like <b>u</b> in <i>put</i>"],["ஊ","oo","like <b>oo</b> in <i>food</i>"],
+         ["எ","e","like <b>e</b> in <i>pen</i>"],["ஏ","ae","long <b>ay</b>"],
+         ["ஐ","ai","like <b>ai</b> in <i>aisle</i>"],["ஒ","o","like <b>o</b> in <i>pot</i>"],
+         ["ஓ","oo","long <b>oh</b>"],["ஔ","au","like <b>ow</b> in <i>cow</i>"]
+       ]},
+      {tag:"Lesson 2", head:"Short vowels & long vowels",
+       intro:"Vowels come in pairs — a <b>short</b> sound and its <b>long</b> partner. The long one is held twice as long.",
+       table:[["Short","Long"],["அ (a)","ஆ (aa)"],["இ (i)","ஈ (ee)"],["உ (u)","ஊ (oo)"],["எ (e)","ஏ (ae)"],["ஒ (o)","ஓ (oo)"]]
+      },
+      {tag:"Lesson 3", head:"The அ / ஆ pair",
+       intro:"<b>அ (a)</b> is short, <b>ஆ (aa)</b> is long. Words that begin with them:",
+       glyphs:[
+         ["அம்மா","ammaa","mother"],["அப்பா","appaa","father"],["அணில்","aṇil","squirrel"],
+         ["ஆடு","aadu","goat"],["ஆமை","aamai","turtle"],["ஆனை","aanai","elephant"]
+       ]},
+      {tag:"Lesson 4", head:"The இ / ஈ pair",
+       intro:"<b>இ (i)</b> is short, <b>ஈ (ee)</b> is long. Listen for the difference:",
+       glyphs:[
+         ["இலை","ilai","leaf"],["இஞ்சி","inji","ginger"],["இரவு","iravu","night"],
+         ["ஈ","ee","housefly"],["ஈரம்","eeram","wetness"],["ஈட்டி","eetti","spear"]
+       ]},
+      {tag:"Lesson 5", head:"The உ / ஊ pair",
+       intro:"<b>உ (u)</b> is short, <b>ஊ (oo)</b> is long:",
+       glyphs:[
+         ["உப்பு","uppu","salt"],["உடல்","udal","body"],["உரல்","ural","stone mortar"],
+         ["ஊர்","oor","town"],["ஊசி","oosi","needle"],["ஊஞ்சல்","oonjal","swing"]
+       ]},
+      {tag:"Lesson 6", head:"The எ / ஏ pair",
+       intro:"<b>எ (e)</b> is short, <b>ஏ (ae)</b> is long:",
+       glyphs:[
+         ["எலி","eli","rat"],["எறும்பு","erumbu","ant"],["எண்","eṇ","number"],
+         ["ஏணி","aeṇi","ladder"],["ஏழு","aezhu","seven"],["ஏரி","aeri","lake"]
+       ]},
+      {tag:"Lesson 7", head:"The ஒ / ஓ pair",
+       intro:"<b>ஒ (o)</b> is short, <b>ஓ (oo)</b> is long:",
+       glyphs:[
+         ["ஒன்று","onru","one"],["ஒட்டகம்","ottagam","camel"],["ஒளி","oḷi","light"],
+         ["ஓடு","oodu","run"],["ஓணான்","ooṇaan","chameleon"],["ஓலை","oolai","palm leaf"]
+       ]},
+      {tag:"Lesson 8", head:"The special vowels ஐ and ஔ",
+       intro:"<b>ஐ (ai)</b> and <b>ஔ (au)</b> each blend two sounds together (diphthongs):",
+       glyphs:[
+         ["ஐந்து","aindhu","five"],["ஐஸ்","ais","ice"],["ஐயா","aiyaa","sir"],
+         ["ஔவை","auvai","Avvai (poet)"],["ஔடதம்","audhadham","medicine"]
+       ]},
+      {tag:"Lesson 9", head:"Say them in order",
+       intro:"Practise chanting all twelve vowels in the correct order — this is how Tamil children learn them:",
+       bullets:[
+         "<b>அ, ஆ, இ, ஈ, உ, ஊ</b> — (a, aa, i, ee, u, oo)",
+         "<b>எ, ஏ, ஐ</b> — (e, ae, ai)",
+         "<b>ஒ, ஓ, ஔ</b> — (o, oo, au)",
+         "Tap the 🔊 on any letter above to hear it, or press <b>Listen to whole week</b> at the top."
+       ]},
+      {tag:"Lesson 10", head:"Vowel review — spot the vowel",
+       intro:"You now know all 12 vowels! Here are their sounds one more time before the test:",
+       glyphs:[
+         ["அ","a","short a"],["ஆ","aa","long a"],["இ","i","short i"],["ஈ","ee","long ee"],
+         ["உ","u","short u"],["ஊ","oo","long oo"],["எ","e","short e"],["ஏ","ae","long ae"],
+         ["ஐ","ai","ai"],["ஒ","o","short o"],["ஓ","oo","long o"],["ஔ","au","au"]
+       ]}
+    ],
+    test:{
+      title:"Week 1 Test — Vowels",
+      sections:[
+        {name:"Section A — Recognise the letter",
+         questions:[
+          {q:"Which letter is the very first vowel of Tamil?",
+           opts:["ஆ","இ","அ","உ"],a:2,
+           e:"The first Tamil vowel is <b>அ (a)</b>. ஆ is the second one (the long partner of அ)."},
+          {q:"What sound does <b>ஈ</b> make?",
+           opts:["short 'i' as in sit","long 'ee' as in see","'u' as in put","'ai' as in aisle"],a:1,
+           e:"<b>ஈ</b> is the long vowel 'ee' (as in <i>see</i>). The short partner இ sounds like 'i' in <i>sit</i>."},
+          {q:"Which letter says <b>'oo'</b> as in <i>food</i>?",
+           opts:["ஊ","எ","ஒ","அ"],a:0,
+           e:"<b>ஊ (oo)</b> is the long 'oo' sound. Its short partner is உ (u)."},
+         ]},
+        {name:"Section B — Short or long?",
+         questions:[
+          {q:"Which one is the <b>long</b> partner of <b>உ</b>?",
+           opts:["ஓ","ஊ","ஆ","ஈ"],a:1,
+           e:"<b>உ (u)</b> is short; its long partner is <b>ஊ (oo)</b>. Both use the same base shape."},
+          {q:"Which pair is correctly matched as short → long?",
+           opts:["இ → ஊ","எ → ஏ","அ → ஈ","ஒ → ஆ"],a:1,
+           e:"<b>எ (e) → ஏ (ae)</b> is a correct short-to-long pair. The others mix unrelated letters."},
+          {q:"<b>ஐ</b> and <b>ஔ</b> are special vowels called…",
+           opts:["short vowels","numbers","diphthongs (two-sound vowels)","consonants"],a:2,
+           e:"<b>ஐ (ai)</b> and <b>ஔ (au)</b> are diphthongs — they blend two vowel sounds together."},
+         ]},
+        {name:"Section C — Vowels in words",
+         questions:[
+          {q:"The word <b>அம்மா</b> (mother) begins with which vowel?",
+           opts:["ஆ","அ","உ","இ"],a:1,
+           e:"<b>அம்மா</b> starts with <b>அ (a)</b>. Notice the mid part 'ம்மா' also contains ஆ, but the first letter is அ."},
+          {q:"Which word begins with the vowel <b>இ</b>?",
+           opts:["ஆடு (goat)","உப்பு (salt)","இலை (leaf)","எலி (mouse)"],a:2,
+           e:"<b>இலை (ilai / leaf)</b> begins with இ. ஆடு starts with ஆ, உப்பு with உ, எலி with எ."},
+          {q:"<b>ஆடு</b> means 'goat'. Its first letter ஆ is…",
+           opts:["a long vowel","a short vowel","a consonant","a number"],a:0,
+           e:"<b>ஆ (aa)</b> is a long vowel — the long partner of அ (a)."},
+         ]},
+        {name:"Section D — Count & review",
+         questions:[
+          {q:"How many vowels (உயிர் எழுத்து) does Tamil have in total?",
+           opts:["10","18","12","5"],a:2,
+           e:"Tamil has exactly <b>12 vowels</b>. (It also has 18 consonants — that's next week!)"},
+          {q:"'Uyir' (உயிர்) — the name for vowels — means…",
+           opts:["stone","life / soul","water","big"],a:1,
+           e:"<b>Uyir means 'life' or 'soul'.</b> Vowels are called life-letters because they can be spoken alone."},
+          {q:"Which of these is <b>NOT</b> a Tamil vowel?",
+           opts:["ஏ","க","ஒ","ஔ"],a:1,
+           e:"<b>க</b> is a consonant (the 'ka' sound), not a vowel. ஏ, ஒ and ஔ are all vowels."},
+         ]}
+      ]
+    }
+  },
+
+  /* ---------------- WEEK 2 : CONSONANTS ---------------- */
+  {
+    id:2,
+    title:"Mei Ezhuthu — The Consonants",
+    tamilTitle:"மெய் எழுத்து",
+    blurb:"The 18 'body' letters (consonants). Each carries a dot (புள்ளி) on top.",
+    lessons:[
+      {tag:"Lesson 1", head:"The 18 consonants (மெய் எழுத்து)",
+       intro:"'Mei' means <i>body</i>. Each consonant has a small dot on top called <b>புள்ளி (pulli)</b>, showing it is a pure consonant sound.",
+       glyphs:[
+         ["க்","k",""],["ங்","ng",""],["ச்","ch",""],["ஞ்","ny",""],["ட்","t",""],["ண்","N",""],
+         ["த்","th",""],["ந்","n",""],["ப்","p",""],["ம்","m",""],["ய்","y",""],["ர்","r",""],
+         ["ல்","l",""],["வ்","v",""],["ழ்","zh",""],["ள்","L",""],["ற்","R",""],["ன்","n",""]
+       ]},
+      {tag:"Lesson 2", head:"The dot (புள்ளி) matters",
+       intro:"A consonant with a dot is 'pure'. Remove the dot and it joins with the vowel 'a'.",
+       table:[["With dot (pure)","Without dot (+a)"],["க் (k)","க (ka)"],["ம் (m)","ம (ma)"],["த் (th)","த (tha)"],["ப் (p)","ப (pa)"]]
+      },
+      {tag:"Lesson 3", head:"Three families of consonants",
+       intro:"Tamil consonants fall into three groups. You'll learn each group next:",
+       bullets:[
+         "<b>Vallinam (hard):</b> க் ச் ட் த் ப் ற்",
+         "<b>Mellinam (soft/nasal):</b> ங் ஞ் ண் ந் ம் ன்",
+         "<b>Idayinam (medium):</b> ய் ர் ல் வ் ழ் ள்"
+       ]},
+      {tag:"Lesson 4", head:"Vallinam — the 6 hard letters",
+       intro:"These are said sharply and strongly. The dot form and the +a form:",
+       glyphs:[
+         ["க்","k → க (ka)",""],["ச்","ch → ச (cha)",""],["ட்","t → ட (ta)",""],
+         ["த்","th → த (tha)",""],["ப்","p → ப (pa)",""],["ற்","R → ற (Ra)",""]
+       ]},
+      {tag:"Lesson 5", head:"Mellinam — the 6 soft (nasal) letters",
+       intro:"These are gentle, hummed through the nose:",
+       glyphs:[
+         ["ங்","ng → ங (nga)",""],["ஞ்","ny → ஞ (nya)",""],["ண்","N → ண (Na)",""],
+         ["ந்","n → ந (na)",""],["ம்","m → ம (ma)",""],["ன்","n → ன (na)",""]
+       ]},
+      {tag:"Lesson 6", head:"Idayinam — the 6 medium letters",
+       intro:"These glide smoothly, in between hard and soft:",
+       glyphs:[
+         ["ய்","y → ய (ya)",""],["ர்","r → ர (ra)",""],["ல்","l → ல (la)",""],
+         ["வ்","v → வ (va)",""],["ழ்","zh → ழ (zha)",""],["ள்","L → ள (La)",""]
+       ]},
+      {tag:"Lesson 7", head:"Hard letters in real words",
+       intro:"See the hard (Vallinam) sounds inside everyday words:",
+       glyphs:[
+         ["கை","kai","hand"],["சட்டை","sattai","shirt"],["டப்பா","dappaa","box/tin"],
+         ["தலை","thalai","head"],["பல்","pal","tooth"],["ஆறு","aaru","river / six"]
+       ]},
+      {tag:"Lesson 8", head:"Soft & medium letters in words",
+       intro:"Now hear the soft and medium sounds inside words:",
+       glyphs:[
+         ["மரம்","maram","tree"],["நிலா","nilaa","moon"],["யானை","yaanai","elephant"],
+         ["ரயில்","rayil","train"],["வண்டி","vaṇdi","vehicle"],["மணி","maṇi","bell"]
+       ]},
+      {tag:"Lesson 9", head:"The tricky three: ல் ள் ழ்",
+       intro:"Tamil has three different 'l/zh' sounds. This is the famous hard part — say each slowly:",
+       glyphs:[
+         ["ல்","l","tongue tip — கல் (stone)"],["ள்","L","tongue curled — முள் (thorn)"],
+         ["ழ்","zh","tongue rolled back — தமிழ் (Tamil)"]
+       ],
+       bullets:["Tip: <b>ழ்</b> is the special sound in the word <b>தமிழ்</b> itself — a soft 'zh' with the tongue rolled back."]},
+      {tag:"Lesson 10", head:"The three N's: ந் ண் ன்",
+       intro:"Tamil also has three 'n' letters. They look and sound slightly different:",
+       glyphs:[
+         ["ந்","n","dental — நாய் (dog)"],["ண்","N","curled — மணி (bell)"],["ன்","n","tip — பொன் (gold)"]
+       ],
+       bullets:["Don't worry about mixing them at first — with practice your ear will hear the difference."]}
+    ],
+    test:{
+      title:"Week 2 Test — Consonants",
+      sections:[
+        {name:"Section A — The pulli (dot)",
+         questions:[
+          {q:"What is the little dot on top of a consonant called?",
+           opts:["kolam","pulli (புள்ளி)","suzhi","meii"],a:1,
+           e:"The dot is called <b>புள்ளி (pulli)</b>. It shows the letter is a pure consonant with no vowel attached."},
+          {q:"'Mei' (மெய்), the name for consonants, means…",
+           opts:["soul","body","fire","five"],a:1,
+           e:"<b>Mei means 'body'.</b> Consonants are body-letters; they need a vowel (soul) to be fully spoken."},
+          {q:"If you remove the dot from <b>க்</b>, what does it become?",
+           opts:["க (ka)","கீ (kee)","ஆ (aa)","stays க்"],a:0,
+           e:"Removing the pulli adds the built-in 'a' sound: <b>க் (k) → க (ka)</b>."},
+         ]},
+        {name:"Section B — Sounds of letters",
+         questions:[
+          {q:"Which letter makes the <b>'m'</b> sound?",
+           opts:["ந்","ம்","ண்","ங்"],a:1,
+           e:"<b>ம் (m)</b> is the 'm' sound. The others are different nasal sounds (n, N, ng)."},
+          {q:"The special Tamil letter <b>ழ்</b> makes which sound?",
+           opts:["simple 'l'","'zh' (a curled tongue sound)","'r'","'v'"],a:1,
+           e:"<b>ழ் (zh)</b> is a unique Tamil sound made by curling the tongue back — famous in the word தமிழ் (Tamil)!"},
+          {q:"Which letter says <b>'p'</b>?",
+           opts:["ப்","த்","ச்","ட்"],a:0,
+           e:"<b>ப் (p)</b> is the 'p' sound. த்=th, ச்=ch, ட்=t (retroflex)."},
+         ]},
+        {name:"Section C — Consonant families",
+         questions:[
+          {q:"Which group are the <b>hard</b> consonants called?",
+           opts:["Mellinam","Idayinam","Vallinam","Uyirmei"],a:2,
+           e:"<b>Vallinam</b> = hard consonants (க் ச் ட் த் ப் ற்). Mellinam are soft/nasal, Idayinam are medium."},
+          {q:"<b>ம், ந், ண்</b> belong to which family?",
+           opts:["Vallinam (hard)","Mellinam (soft/nasal)","Idayinam (medium)","Vowels"],a:1,
+           e:"These are nasal sounds, so they are <b>Mellinam (soft)</b> consonants."},
+          {q:"Which letter is a <b>medium</b> (Idayinam) consonant?",
+           opts:["க்","ய்","ச்","ங்"],a:1,
+           e:"<b>ய் (y)</b> is Idayinam (medium). க் and ச் are hard (Vallinam), ங் is soft (Mellinam)."},
+         ]},
+        {name:"Section D — Count & compare",
+         questions:[
+          {q:"How many consonants (மெய் எழுத்து) does Tamil have?",
+           opts:["12","24","18","30"],a:2,
+           e:"Tamil has <b>18 consonants</b> — together with 12 vowels that makes 30 basic letters."},
+          {q:"Tamil has TWO different letters for the 'n' sound. Which pair is it?",
+           opts:["ந் and ன்","க் and ச்","ம் and ண்","ய் and ர்"],a:0,
+           e:"<b>ந் and ன்</b> are both 'n' sounds (dental and alveolar). Tamil actually has three n-family letters: ந், ன், ண்."},
+          {q:"Which of these is a <b>consonant</b>, not a vowel?",
+           opts:["ஈ","ஔ","ர்","ஏ"],a:2,
+           e:"<b>ர் (r)</b> is a consonant. ஈ, ஔ and ஏ are all vowels."},
+         ]}
+      ]
+    }
+  },
+
+  /* ---------------- WEEK 3 : UYIRMEI + NUMBERS ---------------- */
+  {
+    id:3,
+    title:"Uyirmei & Numbers",
+    tamilTitle:"உயிர்மெய் & எண்கள்",
+    blurb:"Combined letters (consonant + vowel) and the Tamil numbers 1–10.",
+    lessons:[
+      {tag:"Lesson 1", head:"Uyirmei — when a body meets a soul (உயிர்மெய்)",
+       intro:"A consonant (body) + a vowel (soul) = a <b>combined letter (உயிர்மெய்)</b>. Example with க் (k):",
+       glyphs:[
+         ["க","ka","க்+அ"],["கா","kaa","க்+ஆ"],["கி","ki","க்+இ"],["கீ","kee","க்+ஈ"],
+         ["கு","ku","க்+உ"],["கூ","koo","க்+ஊ"],["கெ","ke","க்+எ"],["கே","kae","க்+ஏ"],
+         ["கை","kai","க்+ஐ"],["கொ","ko","க்+ஒ"],["கோ","koa","க்+ஓ"],["கௌ","kau","க்+ஔ"]
+       ]},
+      {tag:"Lesson 2", head:"The same rule works for every consonant",
+       intro:"Just swap the consonant. The vowel signs stay the same.",
+       table:[["+அ","+ஆ","+இ","+உ"],["ம (ma)","மா (maa)","மி (mi)","மு (mu)"],["த (tha)","தா (thaa)","தி (thi)","து (thu)"],["ப (pa)","பா (paa)","பி (pi)","பு (pu)"]]
+      },
+      {tag:"Lesson 3", head:"The 'aa' sign — ா",
+       intro:"Add the sign <b>ா</b> after a consonant to make the long 'aa' sound:",
+       glyphs:[
+         ["கா","kaa","க + ா"],["மா","maa","ம + ா"],["பா","paa","ப + ா"],
+         ["தா","thaa","த + ா"],["நா","naa","ந + ா"],["வா","vaa","வ + ா (come!)"]
+       ]},
+      {tag:"Lesson 4", head:"The 'i' and 'ee' signs — ி  ீ",
+       intro:"<b>ி</b> makes short 'i'; <b>ீ</b> makes long 'ee':",
+       glyphs:[
+         ["கி","ki","க + ி"],["கீ","kee","க + ீ"],["மி","mi","ம + ி"],
+         ["மீ","mee","ம + ீ"],["பி","pi","ப + ி"],["நீ","nee","ந + ீ (you)"]
+       ]},
+      {tag:"Lesson 5", head:"The 'u' and 'oo' signs — ு  ூ",
+       intro:"<b>ு</b> makes short 'u'; <b>ூ</b> makes long 'oo'. These curl onto the letter:",
+       glyphs:[
+         ["கு","ku","க + ு"],["கூ","koo","க + ூ"],["பு","pu","ப + ு"],
+         ["பூ","poo","ப + ூ (flower)"],["து","thu","த + ு"],["மூ","moo","ம + ூ"]
+       ]},
+      {tag:"Lesson 6", head:"The 'e, ae, ai' signs — ெ  ே  ை",
+       intro:"These signs go in <b>front</b> of the letter:",
+       glyphs:[
+         ["கெ","ke","க + ெ"],["கே","kae","க + ே"],["கை","kai","க + ை (hand)"],
+         ["மெ","me","ம + ெ"],["மே","mae","ம + ே"],["பை","pai","ப + ை (bag)"]
+       ]},
+      {tag:"Lesson 7", head:"The 'o, oo, au' signs — ொ  ோ  ௌ",
+       intro:"These wrap around <b>both sides</b> of the letter:",
+       glyphs:[
+         ["கொ","ko","க + ொ"],["கோ","koa","க + ோ"],["கௌ","kau","க + ௌ"],
+         ["மொ","mo","ம + ொ"],["மோ","moa","ம + ோ"],["போ","poa","ப + ோ (go!)"]
+       ]},
+      {tag:"Lesson 8", head:"Reading practice — real words",
+       intro:"Now read whole words made from combined letters. Sound out each letter:",
+       glyphs:[
+         ["கிளி","kiḷi","parrot"],["பூனை","poonai","cat"],["மீன்","meen","fish"],
+         ["கோழி","koazhi","hen"],["பசு","pasu","cow"],["தேநீர்","thaeneer","tea"]
+       ]},
+      {tag:"Lesson 9", head:"Tamil numbers 1 to 10 (எண்கள்)",
+       intro:"Tamil has its own number symbols and spoken names:",
+       glyphs:[
+         ["௧","1","onnu"],["௨","2","rendu"],["௩","3","moonu"],["௪","4","naalu"],["௫","5","anju"],
+         ["௬","6","aaru"],["௭","7","ezhu"],["௮","8","ettu"],["௯","9","onbadhu"],["௧௦","10","paththu"]
+       ]},
+      {tag:"Lesson 10", head:"Counting words (written numbers)",
+       intro:"The full written names for the numbers — used for counting things:",
+       glyphs:[
+         ["ஒன்று","1","onru"],["இரண்டு","2","iraṇdu"],["மூன்று","3","moonru"],["நான்கு","4","naangu"],["ஐந்து","5","aindhu"],
+         ["ஆறு","6","aaru"],["ஏழு","7","aezhu"],["எட்டு","8","ettu"],["ஒன்பது","9","onbadhu"],["பத்து","10","paththu"]
+       ]}
+    ],
+    test:{
+      title:"Week 3 Test — Uyirmei & Numbers",
+      sections:[
+        {name:"Section A — Building combined letters",
+         questions:[
+          {q:"What do you get when you join <b>க் (k) + அ (a)</b>?",
+           opts:["கா","கி","க","கு"],a:2,
+           e:"<b>க் + அ = க (ka)</b>. Adding the first vowel 'a' simply removes the dot."},
+          {q:"Which combined letter is <b>கீ</b>?",
+           opts:["ka","kee","ku","ko"],a:1,
+           e:"<b>கீ = k + ஈ (ee) = 'kee'</b>. The extra long stroke shows the long 'ee' vowel."},
+          {q:"A combined letter (consonant + vowel) is called…",
+           opts:["uyir","mei","uyirmei (உயிர்மெய்)","pulli"],a:2,
+           e:"<b>Uyirmei</b> = uyir (soul/vowel) + mei (body/consonant) joined together."},
+         ]},
+        {name:"Section B — Reading uyirmei",
+         questions:[
+          {q:"Read this letter: <b>மா</b>",
+           opts:["ma","maa","mi","mu"],a:1,
+           e:"<b>மா = ம் + ஆ = 'maa'</b> (long a). Plain ம is just 'ma'."},
+          {q:"Which letter says <b>'thi'</b>?",
+           opts:["த","தா","தி","து"],a:2,
+           e:"<b>தி = th + இ (i) = 'thi'</b>. த=tha, தா=thaa, து=thu."},
+          {q:"<b>பு</b> is made of which two parts?",
+           opts:["ப் + உ","ப் + அ","ப் + இ","ப் + ஆ"],a:0,
+           e:"<b>பு = ப் (p) + உ (u) = 'pu'</b>."},
+         ]},
+        {name:"Section C — Tamil numbers",
+         questions:[
+          {q:"Which Tamil symbol means <b>3</b>?",
+           opts:["௫","௩","௨","௭"],a:1,
+           e:"<b>௩ = 3 (moonu)</b>. ௨=2, ௫=5, ௭=7."},
+          {q:"What number is <b>௫</b>?",
+           opts:["2","10","5","8"],a:2,
+           e:"<b>௫ = 5 (anju)</b>."},
+          {q:"The Tamil symbol for <b>10</b> is written as…",
+           opts:["௧","௧௦","௯","௦"],a:1,
+           e:"<b>௧௦ = 10 (paththu)</b> — it's the symbol for 1 followed by a zero symbol, just like '10'."},
+         ]},
+        {name:"Section D — Number names",
+         questions:[
+          {q:"'Rendu' (ரெண்டு) means which number?",
+           opts:["2","4","7","9"],a:0,
+           e:"<b>Rendu = 2 (௨)</b>. Naalu=4, Ezhu=7, Onbadhu=9."},
+          {q:"Which number is called <b>'ettu'</b>?",
+           opts:["6","8","3","1"],a:1,
+           e:"<b>Ettu = 8 (௮)</b>. Aaru=6, Moonu=3, Onnu=1."},
+          {q:"Put in order — which is the SMALLEST number here?",
+           opts:["௭ (7)","௪ (4)","௯ (9)","௬ (6)"],a:1,
+           e:"<b>௪ = 4</b> is the smallest of these. Order: 4 &lt; 6 &lt; 7 &lt; 9."},
+         ]}
+      ]
+    }
+  },
+
+  /* ---------------- WEEK 4 : WORDS, COLOURS, FAMILY, SENTENCES ---------------- */
+  {
+    id:4,
+    title:"Words, Colours, Family & Sentences",
+    tamilTitle:"சொற்கள், நிறங்கள், குடும்பம்",
+    blurb:"Put letters together into real words and your very first sentences.",
+    lessons:[
+      {tag:"Lesson 1", head:"Colours (நிறங்கள்)",
+       intro:"Everyday colour words:",
+       glyphs:[
+         ["சிவப்பு","sivappu","red"],["நீலம்","neelam","blue"],["பச்சை","pachchai","green"],
+         ["மஞ்சள்","manjal","yellow"],["கருப்பு","karuppu","black"],["வெள்ளை","vellai","white"]
+       ]},
+      {tag:"Lesson 2", head:"Family members (குடும்பம்)",
+       intro:"The people at home:",
+       glyphs:[
+         ["அம்மா","ammaa","mother"],["அப்பா","appaa","father"],["அண்ணா","annaa","elder brother"],
+         ["அக்கா","akkaa","elder sister"],["தம்பி","thambi","younger brother"],["தங்கை","thangai","younger sister"],
+         ["தாத்தா","thaaththaa","grandfather"],["பாட்டி","paatti","grandmother"]
+       ]},
+      {tag:"Lesson 3", head:"Animals (விலங்குகள்)",
+       intro:"Common animals:",
+       glyphs:[
+         ["நாய்","naai","dog"],["பூனை","poonai","cat"],["யானை","yaanai","elephant"],
+         ["மாடு","maadu","cow"],["குதிரை","kudhirai","horse"],["சிங்கம்","singam","lion"]
+       ]},
+      {tag:"Lesson 4", head:"Fruits (பழங்கள்)",
+       intro:"Tasty fruit words:",
+       glyphs:[
+         ["வாழைப்பழம்","vaazhaippazham","banana"],["ஆப்பிள்","aappiḷ","apple"],["மாம்பழம்","maampazham","mango"],
+         ["ஆரஞ்சு","aaranju","orange"],["திராட்சை","thiraatchai","grapes"],["பப்பாளி","pappaaḷi","papaya"]
+       ]},
+      {tag:"Lesson 5", head:"Parts of the body (உடல் உறுப்புகள்)",
+       intro:"Point and say each one:",
+       glyphs:[
+         ["தலை","thalai","head"],["கண்","kaṇ","eye"],["காது","kaadhu","ear"],
+         ["மூக்கு","mookku","nose"],["வாய்","vaai","mouth"],["கை","kai","hand"],["கால்","kaal","leg"]
+       ]},
+      {tag:"Lesson 6", head:"Food & drink (உணவு)",
+       intro:"Things we eat and drink:",
+       glyphs:[
+         ["சாதம்","saadham","rice"],["பால்","paal","milk"],["தண்ணீர்","thaṇṇeer","water"],
+         ["ரொட்டி","rotti","bread"],["முட்டை","muttai","egg"],["தயிர்","thayir","curd"]
+       ]},
+      {tag:"Lesson 7", head:"Greetings & polite words",
+       intro:"The words that make you sound friendly and polite:",
+       glyphs:[
+         ["வணக்கம்","vaṇakkam","hello / greetings"],["நன்றி","nandri","thank you"],["சரி","sari","okay"],
+         ["ஆம்","aam","yes"],["இல்லை","illai","no"],["வீடு","veedu","house"]
+       ]},
+      {tag:"Lesson 8", head:"Action words (செயல்கள்)",
+       intro:"Simple 'doing' words — you can say these as commands:",
+       glyphs:[
+         ["வா","vaa","come"],["போ","poa","go"],["சாப்பிடு","saappidu","eat"],
+         ["படி","padi","read / study"],["ஓடு","oodu","run"],["தூங்கு","thoongu","sleep"]
+       ]},
+      {tag:"Lesson 9", head:"Your first sentences",
+       intro:"Put words together. <b>இது</b> = this, <b>அது</b> = that:",
+       glyphs:[
+         ["இது நாய்","ithu naai","This is a dog"],["அது பூ","athu poo","That is a flower"],
+         ["இது வீடு","ithu veedu","This is a house"],["அது மாடு","athu maadu","That is a cow"]
+       ],
+       bullets:[
+         "Pattern: <b>இது / அது + [thing]</b> — no word for 'is' is needed in Tamil!",
+         "<b>இது பூனை.</b> = This is a cat.  •  <b>அது யானை.</b> = That is an elephant."
+       ]},
+      {tag:"Lesson 10", head:"Everyday sentences",
+       intro:"A few sentences you can really use at home:",
+       glyphs:[
+         ["எனக்கு தண்ணீர் வேண்டும்","enakku thaṇṇeer veṇdum","I want water"],
+         ["உன் பெயர் என்ன?","un peyar enna","What is your name?"],
+         ["நான் நன்றாக இருக்கிறேன்","naan nandraaga irukkiren","I am fine"],
+         ["எனக்கு பசி","enakku pasi","I am hungry"]
+       ],
+       bullets:["Try saying these out loud with the 🔊 buttons. Great work — you're ready for the Week 4 test!"]}
+    ],
+    test:{
+      title:"Week 4 Test — Words & Sentences",
+      sections:[
+        {name:"Section A — Colours",
+         questions:[
+          {q:"What colour is <b>சிவப்பு</b>?",
+           opts:["blue","red","green","black"],a:1,
+           e:"<b>சிவப்பு (sivappu) = red.</b> நீலம்=blue, பச்சை=green, கருப்பு=black."},
+          {q:"Which Tamil word means <b>white</b>?",
+           opts:["வெள்ளை","மஞ்சள்","நீலம்","பச்சை"],a:0,
+           e:"<b>வெள்ளை (vellai) = white.</b> மஞ்சள்=yellow, நீலம்=blue, பச்சை=green."},
+          {q:"<b>மஞ்சள்</b> is the colour of a lemon. It means…",
+           opts:["green","black","yellow","red"],a:2,
+           e:"<b>மஞ்சள் (manjal) = yellow.</b>"},
+         ]},
+        {name:"Section B — Family",
+         questions:[
+          {q:"<b>அம்மா</b> means…",
+           opts:["father","mother","sister","grandmother"],a:1,
+           e:"<b>அம்மா (ammaa) = mother.</b> அப்பா = father."},
+          {q:"Which word means <b>elder brother</b>?",
+           opts:["தம்பி","அக்கா","அண்ணா","தாத்தா"],a:2,
+           e:"<b>அண்ணா (annaa) = elder brother.</b> தம்பி = younger brother, அக்கா = elder sister."},
+          {q:"<b>பாட்டி</b> is which family member?",
+           opts:["grandmother","mother","aunt","younger sister"],a:0,
+           e:"<b>பாட்டி (paatti) = grandmother.</b> தாத்தா = grandfather."},
+         ]},
+        {name:"Section C — Everyday words",
+         questions:[
+          {q:"You say <b>வணக்கம்</b> when you want to…",
+           opts:["say thank you","greet someone (hello)","ask for water","say goodbye only"],a:1,
+           e:"<b>வணக்கம் (vanakkam) = hello / greetings.</b> நன்றி is 'thank you'."},
+          {q:"Which word means <b>water</b>?",
+           opts:["வீடு","தண்ணீர்","பூ","நாய்"],a:1,
+           e:"<b>தண்ணீர் (thanneer) = water.</b> வீடு=house, பூ=flower, நாய்=dog."},
+          {q:"<b>நன்றி</b> means…",
+           opts:["thank you","hello","house","dog"],a:0,
+           e:"<b>நன்றி (nandri) = thank you.</b>"},
+         ]},
+        {name:"Section D — First sentences",
+         questions:[
+          {q:"<b>இது நாய்.</b> (Ithu naai.) means…",
+           opts:["That is a flower","This is a dog","I want water","This is a house"],a:1,
+           e:"<b>இது = this, நாய் = dog</b>, so 'Ithu naai' = <b>This is a dog.</b>"},
+          {q:"How would you say <b>'That is a flower'</b>?",
+           opts:["இது நாய்","அது பூ","இது வீடு","அது நாய்"],a:1,
+           e:"<b>அது = that, பூ = flower</b> → <b>அது பூ (Athu poo).</b> 'இது' would mean 'this'."},
+          {q:"In <b>எனக்கு தண்ணீர் வேண்டும்</b>, the word <b>வேண்டும்</b> means…",
+           opts:["want / need","water","hello","house"],a:0,
+           e:"<b>வேண்டும் (vendum) = want/need.</b> The full line means 'I want water.'"},
+         ]}
+      ]
+    }
+  }
+];
+
+/* ============================================================
+   ANTI-PATTERN SHUFFLE
+   Deterministically reorders the 4 options of every question so the
+   correct answer is spread evenly across positions A/B/C/D (12 each)
+   with no more than 2 in a row — no guessable pattern. Seed is fixed
+   so a question always looks the same on every visit / retake.
+   ============================================================ */
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+(function shuffleAnswers(){
+  const rnd=mulberry32(1359);
+  WEEKS.forEach(w=>w.test.sections.forEach(sec=>sec.questions.forEach(q=>{
+    let idx=[0,1,2,3];
+    for(let i=3;i>0;i--){let j=Math.floor(rnd()*(i+1));[idx[i],idx[j]]=[idx[j],idx[i]];}
+    q.opts=idx.map(i=>q.opts[i]);
+    q.a=idx.indexOf(q.a);
+  })));
+})();
+
+/* ============================================================
+   AUDIO — text-to-speech (browser Speech Synthesis)
+   Reads Tamil letters/words with a Tamil voice when available,
+   and English explanations with an English voice. No internet or
+   files needed — uses voices already installed on the device.
+   ============================================================ */
+const synth = window.speechSynthesis;
+let voices = [];
+function loadVoices(){ voices = synth ? synth.getVoices() : []; }
+if(synth){ loadVoices(); synth.onvoiceschanged = loadVoices; }
+function pickVoice(lang){
+  if(!voices.length) loadVoices();
+  const pref = lang==="ta" ? ["ta-IN","ta"] : ["en-IN","en-GB","en-US","en"];
+  for(const p of pref){ const v = voices.find(v=>v.lang && v.lang.toLowerCase().startsWith(p.toLowerCase())); if(v) return v; }
+  return null;
+}
+let hasTamilVoice = false;
+function checkTamilVoice(){ loadVoices(); hasTamilVoice = !!pickVoice("ta"); return hasTamilVoice; }
+
+let audioQueue = [], audioIdx = 0, audioOnItem = null, audioActive = false;
+function stopAudio(){
+  audioActive = false; audioQueue = []; audioIdx = 0;
+  if(synth){ synth.cancel(); }
+  document.querySelectorAll(".glyph.speaking").forEach(el=>el.classList.remove("speaking"));
+  document.querySelectorAll("[data-audiobtn]").forEach(b=>{ b.classList.remove("stop"); b.innerHTML=b.dataset.play; });
+}
+function speakOne(text, lang){
+  return new Promise(res=>{
+    if(!synth){ res(); return; }
+    const u = new SpeechSynthesisUtterance(text);
+    const v = pickVoice(lang);
+    if(v) u.voice = v;
+    u.lang = lang==="ta" ? (v?v.lang:"ta-IN") : (v?v.lang:"en-US");
+    u.rate = lang==="ta" ? 0.8 : 0.92;
+    u.onend = res; u.onerror = res;
+    synth.speak(u);
+  });
+}
+async function playQueue(btn){
+  audioActive = true;
+  if(btn){ btn.classList.add("stop"); btn.innerHTML = "⏹ Stop"; }
+  for(audioIdx=0; audioIdx<audioQueue.length; audioIdx++){
+    if(!audioActive) break;
+    const item = audioQueue[audioIdx];
+    if(item.el){ document.querySelectorAll(".glyph.speaking").forEach(e=>e.classList.remove("speaking")); item.el.classList.add("speaking"); item.el.scrollIntoView({behavior:"smooth",block:"center"}); }
+    await speakOne(item.text, item.lang);
+  }
+  document.querySelectorAll(".glyph.speaking").forEach(e=>e.classList.remove("speaking"));
+  if(btn && audioActive){ btn.classList.remove("stop"); btn.innerHTML = btn.dataset.play; }
+  audioActive = false;
+}
+const strip = t => (t||"").replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim();
+
+/* Speak a single letter/word: Tamil glyph, then its sound + meaning in English */
+function speakGlyph(idx){
+  stopAudio();
+  const g = window.__glyphMap && window.__glyphMap[idx];
+  if(!g) return;
+  audioQueue = [ {text:g[0], lang:"ta"} ];
+  if(g[1]) audioQueue.push({text:"sounds like "+g[1], lang:"en"});
+  if(g[2]) audioQueue.push({text:"meaning: "+strip(g[2]), lang:"en"});
+  playQueue(null);
+}
+
+/* Build and play a whole lesson's audio */
+function playLesson(lessonKey, btn){
+  const wasThisPlaying = audioActive && window.__playingKey===lessonKey;
+  stopAudio();
+  if(wasThisPlaying){ return; } // toggled off
+  window.__playingKey = lessonKey;
+  const les = window.__lessonMap[lessonKey];
+  audioQueue = [];
+  audioQueue.push({text: strip(les.head), lang:"en"});
+  if(les.intro) audioQueue.push({text: strip(les.intro), lang:"en"});
+  if(les.glyphs){
+    les.glyphs.forEach(g=>{
+      audioQueue.push({text:g[0], lang:"ta", el: document.getElementById(g.__id)});
+      let en = ""; if(g[1]) en += "sounds like "+g[1]+". "; if(g[2]) en += strip(g[2]);
+      if(en) audioQueue.push({text:en, lang:"en", el: document.getElementById(g.__id)});
+    });
+  }
+  if(les.table){
+    les.table.slice(1).forEach(row=> row.forEach(cell=>{
+      const hasTa = /[஀-௿]/.test(cell);
+      audioQueue.push({text: strip(cell), lang: hasTa?"ta":"en"});
+    }));
+  }
+  if(les.bullets){ les.bullets.forEach(b=>{
+    const hasTa = /[஀-௿]/.test(b);
+    audioQueue.push({text: strip(b), lang: hasTa?"ta":"en"});
+  }); }
+  playQueue(btn);
+}
+
+/* Read every lesson of the week, in order */
+function playWeekAudio(weekId, btn){
+  const wasPlaying = audioActive && window.__playingKey==="week"+weekId;
+  stopAudio();
+  if(wasPlaying) return; // toggle off
+  window.__playingKey = "week"+weekId;
+  const w = WEEKS.find(x=>x.id===weekId);
+  audioQueue = [];
+  audioQueue.push({text:"Week "+weekId+". "+strip(w.title), lang:"en"});
+  w.lessons.forEach(les=>{
+    audioQueue.push({text: strip(les.head), lang:"en"});
+    if(les.intro) audioQueue.push({text: strip(les.intro), lang:"en"});
+    if(les.glyphs) les.glyphs.forEach(g=>{
+      const el = document.getElementById(g.__id);
+      audioQueue.push({text:g[0], lang:"ta", el});
+      let en=""; if(g[1]) en+="sounds like "+g[1]+". "; if(g[2]) en+=strip(g[2]);
+      if(en) audioQueue.push({text:en, lang:"en", el});
+    });
+    if(les.table) les.table.slice(1).forEach(row=>row.forEach(cell=>{
+      audioQueue.push({text:strip(cell), lang:/[஀-௿]/.test(cell)?"ta":"en"});
+    }));
+    if(les.bullets) les.bullets.forEach(b=>{
+      audioQueue.push({text:strip(b), lang:/[஀-௿]/.test(b)?"ta":"en"});
+    });
+  });
+  playQueue(btn);
+}
+
+/* ============================================================
+   STATE  (progress saved to this browser)
+   ============================================================ */
+let scores = {};
+try { scores = JSON.parse(localStorage.getItem("tamilFoundationScores")||"{}"); } catch(e){ scores = {}; }
+function saveScores(){ try{ localStorage.setItem("tamilFoundationScores",JSON.stringify(scores)); }catch(e){} }
+
+/* Teacher record store — every submitted test, saved in this browser */
+let submissions = [];
+try { submissions = JSON.parse(localStorage.getItem("tamilFoundationSubmissions")||"[]"); } catch(e){ submissions = []; }
+function saveSubmissions(){ try{ localStorage.setItem("tamilFoundationSubmissions",JSON.stringify(submissions)); }catch(e){} }
+const TEACHER_CODE = "teacher";  /* passcode for the Teacher Access area */
+
+let current = { week:null, answers:{}, graded:false };
+
+/* ============================================================
+   RENDER — HOME
+   ============================================================ */
+function renderHome(){
+  const grid = document.getElementById("weekGrid");
+  grid.innerHTML = "";
+  WEEKS.forEach(w=>{
+    const done = scores[w.id]!==undefined;
+    const div = document.createElement("div");
+    div.className="card weekcard";
+    div.innerHTML = `
+      <div class="no">${w.id}</div>
+      <span class="pill">Week ${w.id}</span>
+      <span class="status ${done?'done':'todo'}">${done? '✓ Test: '+scores[w.id].pct+'%' : 'Not started'}</span>
+      <h3 style="margin-top:8px">${w.title}</h3>
+      <div class="tamil" style="font-size:1.15rem;color:var(--brand)">${w.tamilTitle}</div>
+      <p class="muted" style="min-height:42px">${w.blurb}</p>
+      <button class="btn" onclick="openWeek(${w.id})">${done?'Revise & Retake':'Start Week '+w.id}</button>
+    `;
+    grid.appendChild(div);
+  });
+  const n = Object.keys(scores).length;
+  document.getElementById("homeProgress").style.width = (n/4*100)+"%";
+  document.getElementById("progressText").textContent = `${n} of 4 tests completed`;
+}
+
+/* ============================================================
+   RENDER — WEEK LESSONS
+   ============================================================ */
+function openWeek(id){
+  const w = WEEKS.find(x=>x.id===id);
+  current = { week:id, answers:{}, graded:false };
+  const c = document.getElementById("weekContent");
+  stopAudio();
+  window.__lessonMap = {}; window.__glyphMap = []; // reset audio maps for this week
+  checkTamilVoice();
+  const noVoice = synth && voices.length>0 && !hasTamilVoice; // only warn once voices are known
+  let html = `
+    <div class="card">
+      <span class="pill">Week ${w.id} • Training Programme</span>
+      <h2>${w.title}</h2>
+      <div class="tamil" style="font-size:1.4rem;color:var(--brand)">${w.tamilTitle}</div>
+      <p class="muted">${w.blurb}</p>
+      <div class="audiobar">
+        <button class="btn audio" data-audiobtn data-play="🔊 Listen to whole week"
+          onclick="playWeekAudio(${w.id}, this)">🔊 Listen to whole week</button>
+        <button class="btn audio stop sm" onclick="stopAudio()">⏹ Stop audio</button>
+        <span class="reading-note">Tap any letter's 🔊 to hear just that one.</span>
+      </div>
+      ${!synth ? `<div class="note">⚠️ This browser doesn't support audio reading. Try Chrome, Edge or Safari.</div>` :
+        noVoice ? `<div class="note">ℹ️ No Tamil voice is installed on this device, so Tamil letters may be read with an English voice. The English explanations will still read clearly. To add a Tamil voice: <b>Windows</b> → Settings › Time&nbsp;&amp;&nbsp;Language › Language › add <b>Tamil</b>; <b>Mac/iPhone</b> → Settings › Accessibility › Spoken Content › Voices › add <b>Tamil</b>.</div>` : ``}
+    </div>`;
+  w.lessons.forEach((les,li)=>{
+    const lkey = w.id+"_"+li;
+    window.__lessonMap[lkey] = les;
+    html += `<div class="card"><span class="section-tag">${les.tag}</span><h3>${les.head}</h3>`;
+    html += `<div class="audiobar"><button class="btn audio sm" data-audiobtn data-play="🔊 Read this lesson"
+              onclick="playLesson('${lkey}', this)">🔊 Read this lesson</button></div>`;
+    if(les.intro) html += `<p>${les.intro}</p>`;
+    if(les.glyphs){
+      html += `<div class="letterbox">`;
+      les.glyphs.forEach(g=>{
+        const gid = "gly_"+(window.__glyphMap.length);
+        g.__id = gid; window.__glyphMap.push(g);
+        html += `<div class="glyph" id="${gid}">
+                 <button class="speaker" title="Hear this" onclick="speakGlyph(${window.__glyphMap.length-1})">🔊</button>
+                 <div class="big tamil">${g[0]}</div>
+                 <div class="rom">${g[1]}</div>${g[2]?`<div class="mean">${g[2]}</div>`:''}</div>`;
+      });
+      html += `</div>`;
+    }
+    if(les.table){
+      html += `<table class="tbl">`;
+      les.table.forEach((row,ri)=>{
+        html += `<tr>`;
+        row.forEach(cell=> html += ri===0?`<th class="tamil">${cell}</th>`:`<td class="tamil">${cell}</td>`);
+        html += `</tr>`;
+      });
+      html += `</table>`;
+    }
+    if(les.bullets){
+      html += `<ul class="clean">`;
+      les.bullets.forEach(b=> html += `<li class="tamil">${b}</li>`);
+      html += `</ul>`;
+    }
+    html += `</div>`;
+  });
+  html += `
+    <div class="card" style="text-align:center">
+      <h3>Ready for the Week ${w.id} test? 📝</h3>
+      <p class="muted">${w.test.sections.length} sections •
+        ${w.test.sections.reduce((s,x)=>s+x.questions.length,0)} multiple-choice questions</p>
+      <button class="btn gold" onclick="openTest(${w.id})">Begin the Test →</button>
+    </div>`;
+  c.innerHTML = html;
+  showView("weekView");
+}
+
+/* ============================================================
+   RENDER — TEST
+   ============================================================ */
+function openTest(id){
+  const w = WEEKS.find(x=>x.id===id);
+  current = { week:id, answers:{}, graded:false };
+  const c = document.getElementById("testContent");
+  let html = `
+    <div class="card">
+      <span class="pill">Week ${w.id} • Final Test</span>
+      <h2>${w.test.title}</h2>
+      <div class="note">Choose one answer for each question. When you're done, press
+        <b>Check My Answers</b>. You can change answers freely before checking.</div>
+    </div>`;
+  let qNum = 0;
+  w.test.sections.forEach((sec,si)=>{
+    html += `<div class="card"><span class="section-tag">${sec.name}</span>`;
+    sec.questions.forEach((q,qi)=>{
+      qNum++;
+      const qid = si+"_"+qi;
+      html += `<div class="q" id="q_${qid}">
+        <div class="qtext"><span class="num">Q${qNum}.</span><span class="tamil">${q.q}</span></div>`;
+      q.opts.forEach((opt,oi)=>{
+        html += `<label class="opt" id="opt_${qid}_${oi}" onclick="pick('${qid}',${oi})">
+          <input type="radio" name="rad_${qid}" ${current.answers[qid]===oi?'checked':''}>
+          <span class="tamil">${opt}</span></label>`;
+      });
+      html += `<div class="explain hidden" id="exp_${qid}"></div></div>`;
+    });
+    html += `</div>`;
+  });
+  html += `
+    <div class="card" style="text-align:center" id="gradeBox">
+      <button class="btn" id="checkBtn" onclick="gradeTest(${w.id})">Check My Answers ✓</button>
+      <div class="muted" style="margin-top:8px;font-size:.85rem" id="warnMsg"></div>
+    </div>
+    <div id="resultBox"></div>`;
+  c.innerHTML = html;
+  showView("testView");
+  window.scrollTo(0,0);
+}
+
+function pick(qid,oi){
+  if(current.graded) return;
+  current.answers[qid]=oi;
+  const sec=qid.split("_")[0], q=qid.split("_")[1];
+  const opts = WEEKS.find(x=>x.id===current.week).test.sections[sec].questions[q].opts;
+  for(let i=0;i<opts.length;i++){
+    document.getElementById(`opt_${qid}_${i}`).classList.toggle("sel", i===oi);
+  }
+}
+
+/* ============================================================
+   GRADING + REVIEW
+   ============================================================ */
+function gradeTest(id){
+  const w = WEEKS.find(x=>x.id===id);
+  // check all answered
+  let total=0, unanswered=[];
+  w.test.sections.forEach((sec,si)=> sec.questions.forEach((q,qi)=>{
+    total++; const qid=si+"_"+qi;
+    if(current.answers[qid]===undefined) unanswered.push(qid);
+  }));
+  if(unanswered.length){
+    document.getElementById("warnMsg").innerHTML =
+      `⚠️ Please answer all questions — <b>${unanswered.length}</b> still empty.`;
+    const first=document.getElementById("q_"+unanswered[0]);
+    if(first) first.scrollIntoView({behavior:"smooth",block:"center"});
+    return;
+  }
+  current.graded=true;
+  let correct=0;
+  const wrongList=[];
+  let gNum=0;
+  w.test.sections.forEach((sec,si)=> sec.questions.forEach((q,qi)=>{
+    gNum++;
+    const qid=si+"_"+qi;
+    const chosen=current.answers[qid];
+    const isRight=chosen===q.a;
+    if(isRight) correct++; else wrongList.push({n:gNum,sec:sec.name,q:q.q,chosen:q.opts[chosen],correct:q.opts[q.a],e:q.e});
+    // lock options + colour
+    q.opts.forEach((opt,oi)=>{
+      const el=document.getElementById(`opt_${qid}_${oi}`);
+      el.classList.remove("sel");
+      el.style.pointerEvents="none";
+      if(oi===q.a) el.classList.add("correct");
+      if(oi===chosen && !isRight) el.classList.add("wrong");
+    });
+    const exp=document.getElementById(`exp_${qid}`);
+    exp.classList.remove("hidden");
+    exp.classList.add(isRight?"ok":"no");
+    exp.innerHTML = (isRight?`✅ <b>Correct!</b> `:`❌ <b>Not quite.</b> The right answer is <b class="tamil">${q.opts[q.a]}</b>. `) + q.e;
+  }));
+  const pct=Math.round(correct/total*100);
+  scores[id]={correct,total,pct,wrong:wrongList.length,date:new Date().toLocaleString()};
+  saveScores();
+
+  // ---- Save a full record for the teacher dashboard ----
+  const detail=[]; let dn=0;
+  w.test.sections.forEach((sec,si)=> sec.questions.forEach((q,qi)=>{
+    dn++; const qid=si+"_"+qi; const chosen=current.answers[qid]; const ok=chosen===q.a;
+    detail.push({n:dn, section:sec.name, q:strip(q.q),
+      chosen:strip(q.opts[chosen]), correct:strip(q.opts[q.a]), ok, e:strip(q.e)});
+  }));
+  const attemptId = "att_"+Date.now();
+  current.attemptId = attemptId;
+  submissions.push({
+    id:attemptId, student:"Devvdarshan", week:id, weekTitle:w.title,
+    correct, total, pct, date:new Date().toLocaleString(), detail
+  });
+  saveSubmissions();
+
+  // hide check button, show result + submit
+  document.getElementById("gradeBox").classList.add("hidden");
+  const rb=document.getElementById("resultBox");
+  let msg = pct===100?"Perfect! Outstanding work! 🌟":pct>=70?"Great job! Keep it up! 👏":pct>=40?"Good effort — review the explanations above. 💪":"Keep practising — read the lessons again and retry. 📚";
+  let html = `
+    <div class="card">
+      <div class="scorebar">
+        <div class="pct">${pct}%</div>
+        <div class="lbl">${correct} out of ${total} correct</div>
+        <div class="muted">${msg}</div>
+      </div>`;
+  if(wrongList.length){
+    html += `<h3>Answers to review (${wrongList.length})</h3>
+      <p class="muted">Each mistake is explained inline above (in red). Summary:</p><ul class="clean">`;
+    wrongList.forEach(x=> html += `<li><b>Q${x.n}:</b> correct answer is
+      <b class="tamil" style="color:var(--green)">${x.correct}</b> — ${x.e}</li>`);
+    html += `</ul>`;
+  } else {
+    html += `<p class="tick" style="text-align:center;font-size:1.1rem">🎉 No mistakes — every answer correct!</p>`;
+  }
+  html += `
+      <div class="note">✅ This result has been <b>submitted and saved for the teacher</b>. The teacher can
+      review it any time from <b>Teacher Access</b> on the home screen.</div>
+      <div style="text-align:center;margin-top:14px">
+        <button class="btn alt" onclick="openTeacher()">👩‍🏫 Open Teacher Access</button>
+        <button class="btn ghost" onclick="openTest(${id})" style="margin-left:6px">↺ Retake test</button>
+        <button class="btn ghost" onclick="goHome()" style="margin-left:6px">🏠 Home</button>
+      </div>
+    </div>`;
+  rb.innerHTML=html;
+  renderHome();
+  rb.scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+/* ============================================================
+   TEACHER DASHBOARD
+   ============================================================ */
+function openTeacher(){
+  renderTeacher();
+  showView("teacherView");
+  window.scrollTo(0,0);
+}
+function renderTeacher(){
+  const c=document.getElementById("teacherContent");
+  const list=[...submissions].reverse(); // newest first
+  const badge=p=> p>=70?`<span class="badge hi">${p}%</span>`:p>=40?`<span class="badge mid">${p}%</span>`:`<span class="badge lo">${p}%</span>`;
+  let html=`
+    <div class="card">
+      <span class="pill">Teacher Access</span>
+      <h2>Submitted Tests &amp; Results</h2>
+      <p class="muted">Every test Devvdarshan submits is saved here in this browser.
+        ${list.length} record${list.length===1?"":"s"} on this device.</p>
+      <div class="audiobar">
+        <button class="btn sm" onclick="exportRecords()">⬇ Download all (CSV)</button>
+        <button class="btn sm ghost" onclick="window.print()">🖨 Print</button>
+        <button class="btn sm ghost" onclick="clearRecords()" style="color:var(--red);border-color:var(--red)">🗑 Clear all records</button>
+      </div>
+    </div>`;
+  if(!list.length){
+    html+=`<div class="card"><p class="muted" style="text-align:center">No tests submitted yet. Results will appear here after Devvdarshan completes a test.</p></div>`;
+    c.innerHTML=html; return;
+  }
+  // summary table
+  html+=`<div class="card"><h3>Overview</h3>
+    <table class="teacher-tbl"><tr><th>#</th><th>Student</th><th>Week</th><th>Score</th><th>Submitted on</th></tr>`;
+  list.forEach((r,i)=>{
+    html+=`<tr><td>${list.length-i}</td><td>${r.student}</td>
+      <td>W${r.week} — ${r.weekTitle.split("—")[0].trim()}</td>
+      <td>${badge(r.pct)} ${r.correct}/${r.total}</td>
+      <td>${r.date}</td></tr>`;
+  });
+  html+=`</table></div>`;
+  // detailed expandable per attempt
+  html+=`<div class="card"><h3>Full answer sheets</h3><p class="muted">Click a test to expand every question, the chosen answer, the correct answer, and the explanation.</p>`;
+  list.forEach(r=>{
+    html+=`<details class="attempt"><summary>Week ${r.week} • ${r.pct}% (${r.correct}/${r.total}) • ${r.date}</summary>`;
+    let curSec="";
+    r.detail.forEach(d=>{
+      if(d.section!==curSec){ curSec=d.section; html+=`<div style="font-weight:700;color:var(--brand);margin-top:8px">${curSec}</div>`; }
+      html+=`<div class="qrow"><b>Q${d.n}.</b> ${d.q}
+        <div class="ansline ${d.ok?'r':'w'}">${d.ok?"✅":"❌"} Chosen: ${d.chosen}${d.ok?"":` &nbsp;→ Correct: <b>${d.correct}</b>`}</div>
+        ${d.ok?"":`<div class="ansline muted" style="font-size:.85rem">💡 ${d.e}</div>`}</div>`;
+    });
+    html+=`</details>`;
+  });
+  html+=`</div>`;
+  c.innerHTML=html;
+}
+function exportRecords(){
+  if(!submissions.length){ alert("No records to export."); return; }
+  let rows=[["Student","Week","WeekTitle","Score%","Correct","Total","SubmittedOn","Q#","Section","Question","Chosen","Correct","Right?"]];
+  submissions.forEach(r=> r.detail.forEach(d=>{
+    rows.push([r.student,r.week,r.weekTitle,r.pct,r.correct,r.total,r.date,
+      d.n,d.section,d.q,d.chosen,d.correct,d.ok?"Yes":"No"]);
+  }));
+  const csv=rows.map(row=>row.map(c=>`"${String(c).replace(/"/g,'""')}"`).join(",")).join("\n");
+  const blob=new Blob(["﻿"+csv],{type:"text/csv;charset=utf-8"});
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(blob);
+  a.download="Devvdarshan-Tamil-results.csv"; a.click();
+}
+function clearRecords(){
+  if(!confirm("Delete ALL saved test records on this device? This cannot be undone.")) return;
+  submissions=[]; saveSubmissions(); renderTeacher();
+}
+
+/* ============================================================
+   RESET TRAINING
+   ============================================================ */
+function resetTraining(){
+  const msg="Reset the training?\n\nThis clears Devvdarshan's progress and test scores so the "+
+    "programme starts fresh.\n\nPress OK to also decide about saved teacher records next.";
+  if(!confirm(msg)) return;
+  scores={}; saveScores();
+  const alsoRecords=confirm("Progress cleared. \n\nAlso delete the saved TEACHER records of past submitted tests?\n\nOK = delete them   |   Cancel = keep them for the teacher");
+  if(alsoRecords){ submissions=[]; saveSubmissions(); }
+  stopAudio(); renderHome(); showView("home"); window.scrollTo(0,0);
+  alert("✅ Training has been reset."+(alsoRecords?" Teacher records also cleared.":" Teacher records kept."));
+}
+
+/* ============================================================
+   NAV
+   ============================================================ */
+function showView(v){
+  stopAudio();
+  ["home","weekView","testView","teacherView"].forEach(x=>{
+    document.getElementById(x).classList.toggle("hidden", x!==v);
+  });
+}
+function goHome(){ renderHome(); showView("home"); window.scrollTo(0,0); }
+
+/* init */
+renderHome();
+</script>
+</body>
+</html>

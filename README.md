@@ -2,7 +2,7 @@
 
 An interactive 4-week Tamil foundation programme for absolute beginners, built as a single self-contained web page. No installation, no server, no internet needed once loaded.
 
-**▶️ Live site:** https://USERNAME.github.io/tamil-foundation/
+**▶️ Live site:** https://harivelprabu.github.io/tamil-foundation/
 
 ---
 

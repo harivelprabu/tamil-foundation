@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tamil 247 Letters Chart — உயிர் · மெய் · உயிர்மெய்</title>
+<style>
+  :root{
+    --bg:#faf7f2; --card:#fff; --ink:#1f2430; --muted:#6b7280;
+    --uyir:#c2410c; --uyir-bg:#fff4ec; --uyir-br:#f5c6a5;
+    --mei:#1d4ed8;  --mei-bg:#eef3ff;  --mei-br:#b9caf5;
+    --ayt:#047857;  --ayt-bg:#e9f7f1;  --ayt-br:#a5d9c5;
+    --um:#7c3aed;   --um-bg:#f5f0ff;   --um-br:#d6c6f5;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;padding:28px 18px 140px;background:var(--bg);color:var(--ink);
+       font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+  .wrap{max-width:1240px;margin:0 auto}
+  header{text-align:center}
+  h1{margin:0;font-size:34px;letter-spacing:-.5px}
+  .sub{color:var(--muted);margin-top:6px;font-size:15px}
+
+  #warn{display:none;max-width:760px;margin:18px auto 0;background:#fff7ed;border:1px solid #fed7aa;
+        color:#9a3412;border-radius:12px;padding:12px 16px;font-size:13px;line-height:1.5}
+  #ok{max-width:760px;margin:18px auto 0;background:#ecfdf5;border:1px solid #a7f3d0;
+      color:#065f46;border-radius:12px;padding:10px 16px;font-size:13px;text-align:center}
+
+  .controls{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:20px 0 26px}
+  button{border:1px solid #d8dae0;background:#fff;color:var(--ink);border-radius:999px;
+         padding:8px 16px;font-size:13px;font-weight:600;cursor:pointer}
+  button:hover{background:#f3f4f6}
+  button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+  select{border:1px solid #d8dae0;border-radius:999px;padding:8px 14px;font-size:13px;background:#fff}
+
+  section{background:var(--card);border-radius:16px;padding:22px;margin-bottom:22px;
+          box-shadow:0 1px 3px rgba(0,0,0,.06)}
+  .sechead{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+  h2{margin:0;font-size:21px}
+  .tag{font-size:12px;font-weight:600;padding:3px 10px;border-radius:999px}
+  .t-uyir{background:var(--uyir-bg);color:var(--uyir)}
+  .t-mei{background:var(--mei-bg);color:var(--mei)}
+  .t-ayt{background:var(--ayt-bg);color:var(--ayt)}
+  .t-um{background:var(--um-bg);color:var(--um)}
+  .secsub{color:var(--muted);font-size:14px;margin:8px 0 16px}
+  .subhead{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;
+           letter-spacing:.8px;margin:16px 0 8px}
+
+  .grid{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(90px,1fr))}
+  .cell{border:1.5px solid;border-radius:11px;padding:10px 4px;text-align:center;cursor:pointer;
+        transition:transform .1s,box-shadow .1s;background:#fff}
+  .cell:hover{transform:translateY(-2px);box-shadow:0 5px 14px rgba(0,0,0,.10)}
+  .cell.play{animation:pulse .5s ease}
+  @keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.12)}100%{transform:scale(1)}}
+  .glyph{font-size:34px;line-height:1.2;font-weight:500}
+  .rom{font-size:12px;color:var(--muted);margin-top:3px;font-weight:600}
+  .u{border-color:var(--uyir-br);background:var(--uyir-bg)} .u .glyph{color:var(--uyir)}
+  .m{border-color:var(--mei-br);background:var(--mei-bg)}   .m .glyph{color:var(--mei)}
+  .a{border-color:var(--ayt-br);background:var(--ayt-bg)}   .a .glyph{color:var(--ayt)}
+
+  /* 247 grid */
+  .scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  table{border-collapse:separate;border-spacing:5px;margin:0 auto}
+  th{font-size:12px;font-weight:700;color:var(--muted);padding:4px 6px;white-space:nowrap}
+  th.vh{color:var(--uyir)} th.ch{color:var(--mei);text-align:right}
+  td .cell{min-width:62px;padding:7px 3px;border-color:var(--um-br);background:var(--um-bg)}
+  td .cell .glyph{font-size:26px;color:var(--um)}
+  td .cell .rom{font-size:10px}
+  th .hdr{font-size:22px;display:block}
+
+  #bar{position:fixed;left:0;right:0;bottom:0;background:var(--ink);color:#fff;
+       padding:14px 20px;display:flex;align-items:center;gap:18px;justify-content:center;
+       box-shadow:0 -6px 24px rgba(0,0,0,.22);z-index:10}
+  #bg{font-size:40px;line-height:1}
+  #bi{min-width:220px}
+  #br{font-size:18px;font-weight:700}
+  #bd{font-size:12px;color:#c3c8d2;margin-top:2px}
+  #say{background:#fff;color:var(--ink);border:none}
+  footer{text-align:center;color:#9ca3af;font-size:12px;margin-top:10px}
+  @media print{#bar,#warn,#ok,.controls{display:none}body{background:#fff;padding-bottom:20px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>தமிழ் எழுத்துக்கள் — 247</h1>
+    <div class="sub">உயிர் 12 + மெய் 18 + ஆயுதம் 1 + உயிர்மெய் 216 = 247</div>
+  </header>
+
+  <div id="warn"></div>
+  <div id="ok">🔊 Tap any letter to hear it spoken.</div>
+
+  <div class="controls">
+    <select id="voice"></select>
+    <button id="slow">🐢 Slow mode</button>
+    <button id="rom" class="on">Aa Show romanisation</button>
+  </div>
+
+  <section>
+    <div class="sechead"><h2>உயிர் எழுத்து</h2><span class="tag t-uyir">Uyir · Vowels · 12</span></div>
+    <div class="secsub">"Life" letters — they stand alone and give voice to the consonants.</div>
+    <div class="subhead">குறில் · Short (5)</div><div class="grid" id="g-us"></div>
+    <div class="subhead">நெடில் · Long (7)</div><div class="grid" id="g-ul"></div>
+  </section>
+
+  <section>
+    <div class="sechead"><h2>மெய் எழுத்து</h2><span class="tag t-mei">Mei · Consonants · 18</span></div>
+    <div class="secsub">"Body" letters — each carries a புள்ளி (dot) and has no vowel sound of its own.</div>
+    <div class="subhead">வல்லினம் · Hard (6)</div><div class="grid" id="g-mh"></div>
+    <div class="subhead">மெல்லினம் · Soft / Nasal (6)</div><div class="grid" id="g-mn"></div>
+    <div class="subhead">இடையினம் · Medium (6)</div><div class="grid" id="g-mm"></div>
+  </section>
+
+  <section>
+    <div class="sechead"><h2>ஆயுத எழுத்து</h2><span class="tag t-ayt">Aytham · 1</span></div>
+    <div class="secsub">Never begins a word — always sits between letters.</div>
+    <div class="grid" id="g-a"></div>
+  </section>
+
+  <section>
+    <div class="sechead"><h2>உயிர்மெய் எழுத்து</h2><span class="tag t-um">Uyirmei · 216</span></div>
+    <div class="secsub">Body + life. Each of the 18 consonants combines with each of the 12 vowels
+      (18 × 12 = 216). Read across a row to hear one consonant take every vowel.</div>
+    <div class="scroll"><table id="matrix"></table></div>
+  </section>
+
+  <footer>Tap-to-speak uses your device's Tamil voice. Print-friendly: use ⌘P / Ctrl-P.</footer>
+</div>
+
+<div id="bar">
+  <div id="bg">அ</div>
+  <div id="bi"><div id="br">a</div><div id="bd">Short vowel · uyir</div></div>
+  <button id="say">🔊 Play again</button>
+</div>
+
+<script>
+/* ---------- data ---------- */
+const UYIR = [
+ ["அ","a","குறில்"],["ஆ","aa","நெடில்"],["இ","i","குறில்"],["ஈ","ii","நெடில்"],
+ ["உ","u","குறில்"],["ஊ","uu","நெடில்"],["எ","e","குறில்"],["ஏ","ee","நெடில்"],
+ ["ஐ","ai","நெடில்"],["ஒ","o","குறில்"],["ஓ","oo","நெடில்"],["ஔ","au","நெடில்"]
+];
+/* vowel diacritics, index-matched to UYIR */
+const SIGN = ["","ா","ி","ீ","ு","ூ","ெ","ே","ை","ொ","ோ","ௌ"];
+
+const MEI = [
+ ["க","k","வல்லினம்"],["ங","ng","மெல்லினம்"],["ச","ch","வல்லினம்"],["ஞ","nj","மெல்லினம்"],
+ ["ட","t","வல்லினம்"],["ண","N","மெல்லினம்"],["த","th","வல்லினம்"],["ந","nh","மெல்லினம்"],
+ ["ப","p","வல்லினம்"],["ம","m","மெல்லினம்"],["ய","y","இடையினம்"],["ர","r","இடையினம்"],
+ ["ல","l","இடையினம்"],["வ","v","இடையினம்"],["ழ","zh","இடையினம்"],["ள","L","இடையினம்"],
+ ["ற","tr","வல்லினம்"],["ன","n","மெல்லினம்"]
+];
+const HARD=[0,2,4,6,8,16], NASAL=[1,3,5,7,9,17], MED=[10,11,12,13,14,15];
+
+/* ---------- speech ---------- */
+let voices=[], chosen=null, slow=false;
+const warn=document.getElementById("warn"), okbox=document.getElementById("ok");
+const vsel=document.getElementById("voice");
+
+function loadVoices(){
+  voices = speechSynthesis.getVoices();
+  const ta = voices.filter(v=>/^ta/i.test(v.lang));
+  const idx = voices.filter(v=>/^(hi|ml|te|kn|bn)/i.test(v.lang));
+  vsel.innerHTML="";
+  const pool = ta.length ? ta : idx;
+  if(!voices.length) return;
+  if(ta.length){
+    okbox.innerHTML = "🔊 Tamil voice found — tap any letter to hear it spoken.";
+    warn.style.display="none";
+  } else {
+    okbox.style.display="none";
+    warn.style.display="block";
+    warn.innerHTML = "<b>No Tamil voice installed on this device.</b> Playback will fall back to another " +
+      "voice and will sound wrong. To fix:<br>" +
+      "• <b>Mac:</b> System Settings → Accessibility → Spoken Content → System Voice → Manage Voices → add <b>Tamil</b><br>" +
+      "• <b>Windows:</b> Settings → Time &amp; Language → Speech → Add voices → <b>Tamil</b><br>" +
+      "• <b>iPhone/iPad:</b> Settings → Accessibility → Spoken Content → Voices → <b>Tamil</b><br>" +
+      "• <b>Android/Chrome:</b> install Google Text-to-Speech Tamil language pack<br>" +
+      "Then reload this page.";
+  }
+  (pool.length?pool:voices).forEach((v,i)=>{
+    const o=document.createElement("option");
+    o.value = voices.indexOf(v); o.textContent = v.name+" ("+v.lang+")";
+    vsel.appendChild(o);
+  });
+  chosen = voices[vsel.value];
+}
+speechSynthesis.onvoiceschanged = loadVoices;
+loadVoices();
+setTimeout(loadVoices, 400);   // Chrome sometimes populates late
+
+vsel.onchange = ()=>{ chosen = voices[vsel.value]; };
+document.getElementById("slow").onclick = e=>{ slow=!slow; e.target.classList.toggle("on",slow); };
+
+let last = {g:"அ", r:"a", d:"Short vowel · uyir"};
+function speak(text){
+  if(!("speechSynthesis" in window)) return;
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = "ta-IN";
+  if(chosen) u.voice = chosen;
+  u.rate = slow ? 0.5 : 0.85;
+  u.pitch = 1;
+  speechSynthesis.speak(u);
+}
+document.getElementById("say").onclick = ()=> speak(last.g);
+
+const bg=document.getElementById("bg"), br=document.getElementById("br"), bd=document.getElementById("bd");
+function pick(el,g,r,d){
+  last={g,r,d};
+  bg.textContent=g; br.textContent=r; bd.textContent=d;
+  el.classList.add("play"); setTimeout(()=>el.classList.remove("play"),500);
+  speak(g);
+}
+
+/* ---------- builders ---------- */
+let showRom = true;
+function cell(cls,g,r,d){
+  const c=document.createElement("div");
+  c.className="cell "+cls;
+  c.innerHTML=`<div class="glyph">${g}</div><div class="rom">${r}</div>`;
+  c.onclick=()=>pick(c,g,r,d);
+  return c;
+}
+function fill(id,cls,items){
+  const box=document.getElementById(id);
+  items.forEach(([g,r,d])=>box.appendChild(cell(cls,g,r,d)));
+}
+
+fill("g-us","u", UYIR.filter(v=>v[2]==="குறில்").map(v=>[v[0],v[1],"Uyir · short vowel (குறில்)"]));
+fill("g-ul","u", UYIR.filter(v=>v[2]==="நெடில்").map(v=>[v[0],v[1],"Uyir · long vowel (நெடில்)"]));
+fill("g-mh","m", HARD .map(i=>[MEI[i][0]+"்", MEI[i][1], "Mei · வல்லினம் (hard)"]));
+fill("g-mn","m", NASAL.map(i=>[MEI[i][0]+"்", MEI[i][1], "Mei · மெல்லினம் (soft / nasal)"]));
+fill("g-mm","m", MED  .map(i=>[MEI[i][0]+"்", MEI[i][1], "Mei · இடையினம் (medium)"]));
+fill("g-a","a", [["ஃ","akh","Aytham · ஆயுத எழுத்து"]]);
+
+/* 216 uyirmei matrix */
+const tb=document.getElementById("matrix");
+const head=document.createElement("tr");
+head.appendChild(document.createElement("th"));
+UYIR.forEach(([v,r])=>{
+  const th=document.createElement("th"); th.className="vh";
+  th.innerHTML=`<span class="hdr">${v}</span>${r}`;
+  head.appendChild(th);
+});
+tb.appendChild(head);
+
+MEI.forEach(([c,cr,cls])=>{
+  const tr=document.createElement("tr");
+  const th=document.createElement("th"); th.className="ch";
+  th.innerHTML=`<span class="hdr">${c}்</span>${cr}`;
+  tr.appendChild(th);
+  UYIR.forEach(([v,vr],i)=>{
+    const g = c + SIGN[i];
+    const r = cr + vr;
+    const td=document.createElement("td");
+    td.appendChild(cell("", g, r, `Uyirmei · ${c}் + ${v} · ${cls}`));
+    tr.appendChild(td);
+  });
+  tb.appendChild(tr);
+});
+
+/* romanisation toggle */
+const rb=document.getElementById("rom");
+rb.onclick=()=>{
+  showRom=!showRom;
+  rb.classList.toggle("on",showRom);
+  document.querySelectorAll(".rom").forEach(e=>e.style.display = showRom?"":"none");
+};
+</script>
+</body>
+</html>
